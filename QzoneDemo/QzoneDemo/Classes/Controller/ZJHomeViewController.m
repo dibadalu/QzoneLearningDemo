@@ -10,8 +10,6 @@
 #import "ZJDockView.h"
 #import "ZJConst.h"
 
-
-
 @interface ZJHomeViewController ()
 
 @property(nonatomic,weak) ZJDockView *dockView;

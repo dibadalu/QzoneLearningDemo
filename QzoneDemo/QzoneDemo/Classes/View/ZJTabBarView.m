@@ -8,6 +8,8 @@
 
 #import "ZJTabBarView.h"
 #import "ZJConst.h"
+#import "ZJTabBarButton.h"
+
 
 @implementation ZJTabBarView
 
@@ -33,19 +35,11 @@
  */
 - (void)setupButton:(NSString *)icon title:(NSString *)title{
     
-    UIButton *button = [[UIButton alloc] init];
+    ZJTabBarButton *button = [[ZJTabBarButton alloc] init];
     [button setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage imageNamed:@"tabbar_separate_selected_bg"] forState:UIControlStateDisabled];
     [button setTitle:title forState:UIControlStateNormal];
-
-    //设置按钮的内容水平方向的对齐方式
-    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    CGFloat leftInsert = 10;
-    button.contentEdgeInsets = UIEdgeInsetsMake(0, leftInsert, 0, 0);
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, leftInsert, 0, 0);
     
     [self addSubview:button];
-    
 }
 
 - (void)layoutSubviews{
@@ -54,7 +48,7 @@
     int count = self.subviews.count;
     for (int i = 0; i< count; i++) {
         //取出按钮
-        UIButton *button = self.subviews[i];
+        ZJTabBarButton *button = self.subviews[i];
         button.width = self.width;
         button.height = self.height / count;
         button.x = 0;

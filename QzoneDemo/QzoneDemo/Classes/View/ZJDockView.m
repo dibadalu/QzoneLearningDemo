@@ -28,7 +28,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor redColor];
+//        self.backgroundColor = [UIColor redColor];
         
         
         [self setupChirdView];
@@ -47,7 +47,7 @@
     
     //tabbar
     ZJTabBarView *tabBar = [[ZJTabBarView alloc] init];
-    tabBar.backgroundColor = [UIColor orangeColor];
+//    tabBar.backgroundColor = [UIColor orangeColor];
     [self addSubview:tabBar];
     self.tabBar = tabBar;
     

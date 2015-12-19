@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5433456F1C2534F90065D280 /* ZJTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5433456E1C2534F90065D280 /* ZJTabBarButton.m */; };
 		54C2C9BD1C243577004C9267 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C2C9BC1C243577004C9267 /* main.m */; };
 		54C2C9C61C243577004C9267 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54C2C9C41C243577004C9267 /* Main.storyboard */; };
 		54C2C9C81C243577004C9267 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C2C9C71C243577004C9267 /* Images.xcassets */; };
@@ -33,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5433456D1C2534F90065D280 /* ZJTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJTabBarButton.h; sourceTree = "<group>"; };
+		5433456E1C2534F90065D280 /* ZJTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJTabBarButton.m; sourceTree = "<group>"; };
 		54C2C9B71C243577004C9267 /* QzoneDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QzoneDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C2C9BB1C243577004C9267 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54C2C9BC1C243577004C9267 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -176,6 +179,8 @@
 				54C2C9FD1C243F95004C9267 /* ZJTabBarView.m */,
 				54C2C9FF1C243FB3004C9267 /* ZJToolBarView.h */,
 				54C2CA001C243FB3004C9267 /* ZJToolBarView.m */,
+				5433456D1C2534F90065D280 /* ZJTabBarButton.h */,
+				5433456E1C2534F90065D280 /* ZJTabBarButton.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				54C2C9F71C24381D004C9267 /* UIView+ZJExtension.m in Sources */,
 				54C2C9BD1C243577004C9267 /* main.m in Sources */,
 				54C2C9F11C2437EF004C9267 /* ZJHomeViewController.m in Sources */,
+				5433456F1C2534F90065D280 /* ZJTabBarButton.m in Sources */,
 				54C2CA041C2444FE004C9267 /* ZJConst.m in Sources */,
 				54C2C9FB1C243F67004C9267 /* ZJIconView.m in Sources */,
 				54C2CA011C243FB3004C9267 /* ZJToolBarView.m in Sources */,
@@ -499,6 +505,7 @@
 				54C2C9DC1C243577004C9267 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		54C2C9DD1C243577004C9267 /* Build configuration list for PBXNativeTarget "QzoneDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +514,7 @@
 				54C2C9DF1C243577004C9267 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
