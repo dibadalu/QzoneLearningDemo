@@ -38,6 +38,9 @@
     
 }
 
+/**
+ *  设置子控件的frame
+ */
 - (void)layoutSubviews{
     
     [super layoutSubviews];

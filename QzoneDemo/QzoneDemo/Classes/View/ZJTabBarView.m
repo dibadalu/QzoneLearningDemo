@@ -10,6 +10,11 @@
 #import "ZJConst.h"
 #import "ZJTabBarButton.h"
 
+@interface ZJTabBarView ()
+
+@property(nonatomic,weak) ZJTabBarButton *selectedButton;//被选中的按钮
+
+@end
 
 @implementation ZJTabBarView
 
@@ -38,10 +43,28 @@
     ZJTabBarButton *button = [[ZJTabBarButton alloc] init];
     [button setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
     [button setTitle:title forState:UIControlStateNormal];
+    //监听事件
+    [button addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
     
     [self addSubview:button];
 }
 
+- (void)btnClick:(ZJTabBarButton *)button{
+    
+//    NSLog(@"btnClick");
+    self.selectedButton.enabled = YES;//恢复可以被选择状态
+    button.enabled = NO;//被点击按钮变成disabled
+    self.selectedButton = button;
+    
+    
+    //发出通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:ZJTabBarDidSelectNotification object:nil userInfo:@{ZJTabBarSelectIndex : @(button.tag)}];
+    
+}
+
+/**
+ *  设置子控件的frame
+ */
 - (void)layoutSubviews{
     [super layoutSubviews];
     
@@ -53,6 +76,9 @@
         button.height = self.height / count;
         button.x = 0;
         button.y = button.height * i;
+        
+        //设置tag
+        button.tag = i;
     }
 }
 

@@ -30,7 +30,6 @@
         
 //        self.backgroundColor = [UIColor redColor];
         
-        
         [self setupChirdView];
         
     }
@@ -58,6 +57,9 @@
     self.toolBar = toolBar;
 }
 
+/**
+ *  设置子控件的frame
+ */
 - (void)layoutSubviews{
     
     [super layoutSubviews];

@@ -19,6 +19,10 @@
         //设置图片居中显示
         self.imageView.contentMode = UIViewContentModeCenter;
         
+        //设置被点击时按钮不要变灰
+        self.adjustsImageWhenDisabled = NO;
+        self.adjustsImageWhenHighlighted = NO;
+        
         //设置按钮的内容水平方向的对齐方式
 //        self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 //        CGFloat leftInsert = 10;
@@ -29,6 +33,16 @@
     return self;
 }
 
+/**
+ *  被点击时按钮不要显示高亮状态
+ */
+- (void)setHighlighted:(BOOL)highlighted{
+    
+}
+
+/**
+ *  设置子控件的frame
+ */
 - (void)layoutSubviews{
     
     [super layoutSubviews];

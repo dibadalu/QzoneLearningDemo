@@ -11,3 +11,6 @@ const CGFloat ZJScreenPW = 768;
 //dock横屏时的宽度
 const CGFloat ZJScreenLW = 1024;
 
+NSString *const ZJTabBarDidSelectNotification = @"ZJTabBarDidSelectNotification";
+NSString *const ZJTabBarSelectIndex = @"ZJTabBarSelectIndex";
+
