@@ -47,6 +47,7 @@
     [button addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
     
     [self addSubview:button];
+
 }
 
 - (void)btnClick:(ZJTabBarButton *)button{
@@ -55,7 +56,6 @@
     self.selectedButton.enabled = YES;//恢复可以被选择状态
     button.enabled = NO;//被点击按钮变成disabled
     self.selectedButton = button;
-    
     
     //发出通知
     [[NSNotificationCenter defaultCenter] postNotificationName:ZJTabBarDidSelectNotification object:nil userInfo:@{ZJTabBarSelectIndex : @(button.tag)}];

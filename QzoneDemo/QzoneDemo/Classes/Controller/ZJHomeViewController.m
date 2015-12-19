@@ -13,6 +13,7 @@
  需要把"chirdView添加到父控件"的代码放在masonry代码之前
  */
 
+
 #import "ZJHomeViewController.h"
 #import "ZJDockView.h"
 #import "ZJConst.h"
@@ -27,17 +28,31 @@
 @end
 
 @implementation ZJHomeViewController
+- (ZJDockView *)dockView{
+    if (!_dockView) {
+        ZJDockView *dockView =  [[ZJDockView alloc] init];
+        [self.view addSubview:dockView];
+        self.dockView = dockView;
+    }
+    return _dockView;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
    
     self.view.backgroundColor = ZJColor(55, 55, 55);
     
-    //初始化dock
-    [self setupDockView];
-    
     //初始化子控制器
     [self setupChirdVcs];
+
+    //根据屏幕方向设置dock的尺寸
+    [self willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
+    
+    
+    //监听通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarDidSelect:) name:ZJTabBarDidSelectNotification object:nil];
+
 }
 
 - (void)dealloc{
@@ -60,30 +75,17 @@
         [self addChildViewController:chirdVc];
     }
     
+    //默认选中tabBar第0个按钮
+    [self switchChirdVcWithIndex:0];
+    
 }
 
 /**
- *  初始化dock
+ *  切换子控制器
+ *
+ *  @param index 对应的索引
  */
-- (void)setupDockView{
-    
-    //创建dock
-    ZJDockView *dockView =  [[ZJDockView alloc] init];
-    [self.view addSubview:dockView];
-    self.dockView = dockView;
-    
-    //根据屏幕方向设置dock的尺寸
-    [self willRotateToInterfaceOrientation:self.interfaceOrientation duration:0];
-    
-    //监听通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarDidSelect:) name:ZJTabBarDidSelectNotification object:nil];
-}
-
-- (void)tabBarDidSelect:(NSNotification *)notification{
-    
-    int index = [notification.userInfo[ZJTabBarSelectIndex] intValue];
-    
-//    NSLog(@"=---%d",index);
+- (void)switchChirdVcWithIndex:(int)index{
     
     //移除正在显示的子控制器
     [self.showingChirdVc.view removeFromSuperview];
@@ -94,34 +96,30 @@
     [self.view addSubview:newChirdVc.view];
     self.showingChirdVc = newChirdVc;
     
-//    newChirdVc.view.x = self.dockView.width;
-//    newChirdVc.view.y = 0;
-//    newChirdVc.view.width = 600;
-//    newChirdVc.view.height = self.view.height;
-#warning 通过masonry设置autolayout 
+#warning 通过masonry设置autolayout
     //添加约束
     [newChirdVc.view mas_makeConstraints:^(MASConstraintMaker *make) {
-       
-//        make.width.mas_equalTo(600);
+        
+        //        make.width.mas_equalTo(600);
         make.right.equalTo(self.view.mas_right);
         make.top.equalTo(self.view.mas_top);
         make.bottom.equalTo(self.view.mas_bottom);
         make.left.equalTo(self.dockView.mas_right);
         
     }];
-   
-    
     
 }
-/*
- width = 600
- top = view.top
- bottom = view.bottom
- left = dock.right
- */
+
+- (void)tabBarDidSelect:(NSNotification *)notification{
+    
+    int index = [notification.userInfo[ZJTabBarSelectIndex] intValue];
+    
+    //切换子控制器
+    [self switchChirdVcWithIndex:index];
+}
 
 
-#pragma mark - 屏幕旋转
+#pragma mark - 监听屏幕方向
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
 
     if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
@@ -138,16 +136,8 @@
 #warning 默认情况下，所有子控制器的view.autoresizingMask都包含UIViewAutoresizingFlexibleWidth与UIViewAutoresizingFlexibleHeight，会跟随夫控件改变
     //旋转后重新设置子控制器的frame
 //    self.showingChirdVc.view.autoresizingMask = UIViewAutoresizingNone;//不要更随伸缩
-//    self.showingChirdVc.view.x = self.dockView.width;
-//    self.showingChirdVc.view.y = 0;
-//    self.showingChirdVc.view.height = self.dockView.height;
-//    self.showingChirdVc.view.width = 600;
-    
-    
+        
 }
-
-
-
 
 
 @end
