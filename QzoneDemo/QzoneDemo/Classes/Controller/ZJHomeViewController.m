@@ -6,9 +6,17 @@
 //  Copyright (c) 2015年 dibadalu. All rights reserved.
 //
 
+/*
+ masonry框架
+ 使用masonry报错：
+ reason: 'couldn't find a common superview for <UIView: 0x7b09ad10; frame = (0 0; 768 1024); autoresize = W+H; layer = <CALayer: 0x7b09ada0>> and <UIView: 0x7ae5c940; frame = (0 0; 768 1024); autoresize = W+H; layer = <CALayer: 0x7ae5c200>>'
+ 需要把"chirdView添加到父控件"的代码放在masonry代码之前
+ */
+
 #import "ZJHomeViewController.h"
 #import "ZJDockView.h"
 #import "ZJConst.h"
+#import "Masonry.h"//第三方autoLayout框架
 
 @interface ZJHomeViewController ()
 
@@ -81,17 +89,37 @@
     [self.showingChirdVc.view removeFromSuperview];
     
     //取出index对应的子控制器并显示
-    UIViewController *chirdVc = self.childViewControllers[index];
-    chirdVc.view.x = self.dockView.width;
-    chirdVc.view.y = 0;
-    chirdVc.view.width = 600;
-    chirdVc.view.height = self.view.height;
+    UIViewController *newChirdVc = self.childViewControllers[index];
     //将chirdVc的view显示在homeVc的view上
-    [self.view addSubview:chirdVc.view];
-    self.showingChirdVc = chirdVc;
+    [self.view addSubview:newChirdVc.view];
+    self.showingChirdVc = newChirdVc;
+    
+//    newChirdVc.view.x = self.dockView.width;
+//    newChirdVc.view.y = 0;
+//    newChirdVc.view.width = 600;
+//    newChirdVc.view.height = self.view.height;
+#warning 通过masonry设置autolayout 
+    //添加约束
+    [newChirdVc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+//        make.width.mas_equalTo(600);
+        make.right.equalTo(self.view.mas_right);
+        make.top.equalTo(self.view.mas_top);
+        make.bottom.equalTo(self.view.mas_bottom);
+        make.left.equalTo(self.dockView.mas_right);
+        
+    }];
+   
     
     
 }
+/*
+ width = 600
+ top = view.top
+ bottom = view.bottom
+ left = dock.right
+ */
+
 
 #pragma mark - 屏幕旋转
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
@@ -109,11 +137,11 @@
     
 #warning 默认情况下，所有子控制器的view.autoresizingMask都包含UIViewAutoresizingFlexibleWidth与UIViewAutoresizingFlexibleHeight，会跟随夫控件改变
     //旋转后重新设置子控制器的frame
-    self.showingChirdVc.view.autoresizingMask = UIViewAutoresizingNone;//不要更随伸缩
-    self.showingChirdVc.view.x = self.dockView.width;
-    self.showingChirdVc.view.y = 0;
-    self.showingChirdVc.view.height = self.dockView.height;
-    self.showingChirdVc.view.width = 600;
+//    self.showingChirdVc.view.autoresizingMask = UIViewAutoresizingNone;//不要更随伸缩
+//    self.showingChirdVc.view.x = self.dockView.width;
+//    self.showingChirdVc.view.y = 0;
+//    self.showingChirdVc.view.height = self.dockView.height;
+//    self.showingChirdVc.view.width = 600;
     
     
 }
